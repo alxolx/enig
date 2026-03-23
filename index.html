@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGIMA — Brand Reveal</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{background:#000d24;min-height:100vh;overflow:hidden}
+  .stage{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100vw;
+    height:100vh;
+    padding:40px;
+  }
+
+  svg#scene{
+    width:100%;
+    height:auto;
+    display:block;
+    max-height:calc(100vh - 80px);
+  }
+
+  .gl  {stroke:#3a7aee;stroke-width:1.4;fill:none;opacity:0}
+  .gd  {stroke:#3a7aee;stroke-width:1.4;fill:none;stroke-dasharray:4 2;opacity:0}
+  .gc  {stroke:#3a7aee;stroke-width:1.1;fill:none;opacity:0}
+  .cross{stroke:#ee8c1a;stroke-width:1.6;fill:none;opacity:0}
+  .dot {fill:#4a8fff;opacity:0}
+
+  /* Logo paths */
+  .lp{
+    fill:none;
+    stroke:#7ab0ff;
+    stroke-width:1.6;
+    stroke-miterlimit:10;
+    stroke-linejoin:round;
+    stroke-linecap:round;
+    opacity:0;
+    transition: fill 0.6s ease, stroke 0.6s ease, stroke-width 0.6s ease;
+  }
+  .lp.filled{
+    fill:#7ab0ff;
+    stroke:none;
+    stroke-width:0;
+  }
+
+  .noise{
+    position:absolute;top:0;left:0;width:100%;height:100%;
+    opacity:.02;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:200px 200px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="noise"></div>
+
+  <svg id="scene" viewBox="342 422 1224 186" preserveAspectRatio="xMidYMid meet">
+
+    <!-- Horizontal grid lines — clipped to logo composition width -->
+    <g id="hl">
+      <line class="gl" x1="372" y1="432" x2="1536" y2="432"/>
+      <line class="gl" x1="372" y1="456" x2="1536" y2="456"/>
+      <line class="gl" x1="372" y1="504" x2="1536" y2="504"/>
+      <line class="gl" x1="372" y1="527" x2="1536" y2="527"/>
+      <line class="gl" x1="372" y1="539" x2="1536" y2="539"/>
+      <line class="gl" x1="372" y1="561" x2="1536" y2="561"/>
+      <line class="gl" x1="372" y1="575" x2="1536" y2="575"/>
+      <line class="gl" x1="372" y1="598" x2="1536" y2="598"/>
+    </g>
+
+    <!-- Vertical grid lines — aligned to composition height, with left-edge lines per letter -->
+    <g id="vl">
+      <!-- E left edge + internal -->
+      <line class="gl" x1="372"  y1="432" x2="372"  y2="598"/>
+      <line class="gl" x1="396"  y1="432" x2="396"  y2="598"/>
+      <line class="gl" x1="550"  y1="432" x2="550"  y2="598"/>
+      <line class="gl" x1="583"  y1="432" x2="583"  y2="598"/>
+      <line class="gl" x1="607"  y1="432" x2="607"  y2="598"/>
+      <!-- N left edge + internal -->
+      <line class="gl" x1="607"  y1="432" x2="607"  y2="598"/>
+      <line class="gl" x1="741"  y1="432" x2="741"  y2="598"/>
+      <line class="gl" x1="766"  y1="432" x2="766"  y2="598"/>
+      <!-- I left edge -->
+      <line class="gl" x1="807"  y1="432" x2="807"  y2="598"/>
+      <line class="gl" x1="831"  y1="432" x2="831"  y2="598"/>
+      <line class="gl" x1="867"  y1="432" x2="867"  y2="598"/>
+      <line class="gl" x1="892"  y1="432" x2="892"  y2="598"/>
+      <!-- G left edge + internal -->
+      <line class="gl" x1="867"  y1="432" x2="867"  y2="598"/>
+      <line class="gl" x1="962"  y1="432" x2="962"  y2="598"/>
+      <line class="gl" x1="1031" y1="432" x2="1031" y2="598"/>
+      <line class="gl" x1="1053" y1="432" x2="1053" y2="598"/>
+      <line class="gl" x1="1088" y1="432" x2="1088" y2="598"/>
+      <line class="gl" x1="1111" y1="432" x2="1111" y2="598"/>
+      <!-- M left edge + internal -->
+      <line class="gl" x1="1111" y1="432" x2="1111" y2="598"/>
+      <line class="gl" x1="1292" y1="432" x2="1292" y2="598"/>
+      <line class="gl" x1="1316" y1="432" x2="1316" y2="598"/>
+      <!-- A left edge + internal -->
+      <line class="gl" x1="1348" y1="432" x2="1348" y2="598"/>
+      <line class="gl" x1="1439" y1="432" x2="1439" y2="598"/>
+      <line class="gl" x1="1536" y1="432" x2="1536" y2="598"/>
+    </g>
+
+    <!-- Crosshairs — exactly on grid intersections, grouped with ids -->
+    <g id="ch">
+      <g id="cross-e">
+        <line class="cross" x1="389" y1="527" x2="403" y2="527"/>
+        <line class="cross" x1="396" y1="520" x2="396" y2="534"/>
+      </g>
+      <g id="cross-n">
+        <line class="cross" x1="600" y1="432" x2="614" y2="432"/>
+        <line class="cross" x1="607" y1="425" x2="607" y2="439"/>
+      </g>
+      <g id="cross-i">
+        <line class="cross" x1="800" y1="527" x2="814" y2="527"/>
+        <line class="cross" x1="807" y1="520" x2="807" y2="534"/>
+      </g>
+      <g id="cross-g">
+        <line class="cross" x1="1104" y1="527" x2="1118" y2="527"/>
+        <line class="cross" x1="1111" y1="520" x2="1111" y2="534"/>
+      </g>
+      <g id="cross-m">
+        <line class="cross" x1="1285" y1="432" x2="1299" y2="432"/>
+        <line class="cross" x1="1292" y1="425" x2="1292" y2="439"/>
+      </g>
+      <g id="cross-a">
+        <line class="cross" x1="1432" y1="432" x2="1446" y2="432"/>
+        <line class="cross" x1="1439" y1="425" x2="1439" y2="439"/>
+      </g>
+    </g>
+
+    <!-- Construction circles -->
+    <g id="cc">
+      <circle class="gc" cx="392"  cy="482" r="19.87"/>
+      <circle class="gc" cx="392"  cy="548" r="19.87"/>
+      <circle class="gc" cx="407"  cy="466" r="10.46"/>
+      <circle class="gc" cx="407"  cy="564" r="10.46"/>
+      <circle class="gc" cx="419"  cy="516" r="11.82"/>
+      <circle class="gc" cx="614"  cy="487" r="6.45"/>
+      <circle class="gc" cx="710"  cy="563" r="35.35"/>
+      <circle class="gc" cx="719"  cy="557" r="22.41"/>
+      <circle class="gc" cx="1007" cy="545" r="18.18"/>
+      <circle class="gc" cx="1016" cy="541" r="13.45"/>
+      <circle class="gc" cx="1020" cy="537" r="33.06"/>
+      <circle class="gc" cx="1120" cy="489" r="8"/>
+      <circle class="gc" cx="1201" cy="559" r="25.58"/>
+      <circle class="gc" cx="1202" cy="548" r="8.87"/>
+      <circle class="gc" cx="1284" cy="489" r="8"/>
+      <circle class="gc" cx="1428" cy="458" r="26.84"/>
+      <circle class="gc" cx="1451" cy="458" r="26.84"/>
+    </g>
+
+    <!-- Pulse dots — same positions as crosshairs -->
+    <g id="dots">
+      <circle class="dot" id="dot-e" cx="396"  cy="527" r="3"/>
+      <circle class="dot" id="dot-n" cx="607"  cy="432" r="3"/>
+      <circle class="dot" id="dot-i" cx="807"  cy="527" r="3"/>
+      <circle class="dot" id="dot-g" cx="1111" cy="527" r="3"/>
+      <circle class="dot" id="dot-m" cx="1292" cy="432" r="3"/>
+      <circle class="dot" id="dot-a" cx="1439" cy="432" r="3"/>
+    </g>
+
+    <!-- Logo paths — drawn from construction circle points -->
+    <g id="logo">
+      <!-- E: top arm -->
+      <path class="lp" id="e3" data-start="0.82"
+        d="M550.31,452.35c0,2.09-1.7,3.79-3.79,3.79l-138.23.13c-7.18,0-11.47,3.91-11.47,10.46v32.42c0,1.91-1.55,3.45-3.45,3.45-5.42,0-10.56-1.91-14.47-5.37-3.77-3.34-5.92-7.69-6.06-12.23-.11-3.52-.13-48.63-.13-48.63,0-2.09,1.7-3.79,3.79-3.79l171.81-.03c1.1,0,2,.89,2,2v17.82Z"/>
+      <!-- E: middle bar -->
+      <path class="lp" id="e1" data-start="0.12"
+        d="M532.67,508.08c0-2.09-1.7-3.79-3.79-3.79l-109.48-.03c-2.17,0-4.3.62-6.13,1.79-7,4.47-7,15.58,0,20.06,1.83,1.17,3.96,1.79,6.13,1.79h111.27c1.1,0,2-.89,2-2v-17.82Z"/>
+      <!-- E: bottom arm -->
+      <path class="lp" id="e2" data-start="0.82"
+        d="M550.31,578.91c0-2.09-1.7-3.79-3.79-3.79l-138.23-.13c-7.18,0-11.47-3.91-11.47-10.46v-32.42c0-1.91-1.55-3.45-3.45-3.45-5.42,0-10.56,1.91-14.47,5.37-3.77,3.34-5.92,7.69-6.06,12.23-.11,3.52-.13,48.63-.13,48.63,0,2.09,1.7,3.79,3.79,3.79l171.81.03c1.1,0,2-.89,2-2v-17.82Z"/>
+      <!-- N -->
+      <path class="lp" id="n1" data-start="0.68"
+        d="M764.06,432.53h-19.06c-1.78,0-3.22,1.44-3.22,3.22v122.14c-.21,7.58-3.3,13.95-8.79,17.99-3.13,2.31-11.02,5.76-20.88,2.88-3.12-.91-5.97-2.62-8.68-4.87-5.64-4.69-9.62-10.98-15.97-21.01l-73.29-119.4c-.36-.59-1.01-.95-1.7-.95h-21.74s-3.08,0-3.08,0c-2.09,0-3.79,1.7-3.79,3.79v8s-.03.05-.03.05v152.35c0,.55.22,1.05.58,1.41s.86.58,1.41.58h17.82c2.09,0,3.79-1.7,3.79-3.79h0s.02-104.94.02-104.94c.11-5.76,2.12-8.35,5.65-8.87,4.05-.6,7.25,3.36,9.89,7.38,4.52,6.88,13.21,21.72,13.21,21.72,0,0,39.45,64.07,42.4,68.9,8.11,13.25,16.45,17.13,21.14,18.41,4.05,1.1,12.2,1.19,13.54,1.19h50.3c.99,0,2.45-.81,2.45-2.13l.02-162.07c0-1.1-.89-2-2-2Z"/>
+      <!-- I -->
+      <path class="lp" id="i1" data-start="0.0"
+        d="M831.29,434.53c0-1.1-.89-2-2-2h-17.82c-2.09,0-3.79,1.7-3.79,3.79l-.03,160.4c0,1.1.89,2,2,2h17.82c2.09,0,3.79-1.7,3.79-3.79l.03-160.4Z"/>
+      <!-- G -->
+      <path class="lp" id="g1" data-start="0.52"
+        d="M1019.74,504.99h-51.59c-2.87,0-5.21,2.34-5.21,5.21v14.41c0,1.76,1.43,3.18,3.18,3.18h51.8c3.2,0,6.32,1.31,8.55,3.61,2.19,2.25,3.41,5.3,3.33,8.37-.16,6.61-3.2,12.64-9.33,18.44l-.42.42c-9.45,10.47-32.47,17.7-56.2,17.7-.28,0-.56,0-.85,0-33.39-.24-50.03-13.56-57.02-21.54-.3-.34-1.09-1.24-3.2-4.22l-.21-.31c-.87-1.36-4.3-6.87-5.21-8.9-4.1-9.15-5.93-19.67-5.45-31.29,1.55-37.19,28.86-50.99,40.54-55.2,9.41-3.39,20.62-5.11,33.3-5.11,15.67,0,30.66,2.69,38.57,5.35,7.61,2.56,13.75,5.79,18.76,9.89,1.57,1.28,3.8,1.16,5.2-.27l12.53-12.87c.62-.64.95-1.52.9-2.41-.05-.89-.48-1.73-1.18-2.29-10.45-8.49-48.56-28.39-98.8-18.71-57.49,11.07-73.65,57.37-74.16,80.31-.63,28.42,8.45,51.29,26.99,67.98,13.54,12.19,34.4,19.86,58.72,21.61,3.49.25,6.98.37,10.46.37,19.07,0,37.57-3.72,51.98-10.58,24.24-11.55,36.82-28.52,37.4-50.46.13-5.07-1.68-15.73-9.32-23.55-5.96-6.1-14.07-9.19-24.07-9.14Z"/>
+      <!-- M -->
+      <path class="lp" id="m1" data-start="0.38"
+        d="M1316.17,434.66c0-1.1-.89-2-2-2h-17.82c-.13,0-.26.03-.38.04h-10.13l-20.23,30.95-56.02,89.41c-.29.49-2.51,4.12-7.09,4.33-.11,0-.19-.03-.3-.04-.1,0-.19.04-.3.04-4.58-.22-6.8-3.84-7.09-4.33l-74.43-120.35h-10.31c-.07,0-.12-.04-.19-.04h-17.82c-2.09,0-3.79,1.7-3.79,3.79v7.2s-.03.04-.03.05v153.19c0,1.1.89,2,2,2h17.82c2.09,0,3.79-1.7,3.79-3.79v-6.96s.02-97.54.02-97.54c.11-4.31,1.27-7.94,5.65-9.32,2.51-.79,5.06-.37,7.33,1.46,1.83,1.48,3.49,4.12,4.67,5.92,4.52,6.88,47.86,77.87,47.86,77.87l5.49,8.89c1.85,2.61,7.1,9.54,18.62,9.54.14,0,.28-.01.42-.01.1,0,.2,0,.3,0,.1,0,.2,0,.3,0,.14,0,.28.01.42.01,11.52,0,16.77-6.92,18.62-9.54l5.49-8.89s43.34-70.99,47.86-77.87c1.18-1.8,2.84-4.44,4.67-5.92,2.27-1.83,4.82-2.25,7.33-1.46,4.38,1.38,5.54,5.01,5.65,9.32v24.95s-.01,81.3-.01,81.3c0,1.1.89,2,2,2h1.45c.13.01.25.04.38.04h10.05s.06-.02.09-.04h5.85c2.09,0,3.79-1.7,3.79-3.79v-16.06c.02-.08.03-.13.03-.17v-123.66s0-.02,0-.03v-20.48Z"/>
+      <!-- A -->
+      <path class="lp" id="a1" data-start="0.07"
+        d="M1479.95,457.52c-2.92-7.33-5.37-12.31-7.64-15.65-1.89-2.78-2.62-3.45-4.08-4.62-5.86-4.69-13.8-5.42-28.5-5.42s-21.03.07-28.32,5.43c-1.34.99-2.66,2.5-4.08,4.62-2.25,3.36-4.72,8.32-7.64,15.65v.02c-1.46,3.64-55.45,141.2-55.45,141.2h17.94c2.31,0,1.77,0,3.99,0,1.42,0,1.63-1.14,2.09-2.16l13.02-33.39c.36-.91,1.24-1.52,2.22-1.52h112.65c.98,0,1.86.6,2.22,1.52l13.02,33.39c.46,1.03.67,2.16,2.09,2.16,2.22,0,1.67,0,3.99,0h17.94l-55.45-141.22ZM1416.75,472.74s4.99-12.72,6.88-15.34c1.02-1.41,1.46-2.29,2.97-3.68,3.73-3.4,11.34-3.32,13.12-3.32s9.86.2,13.16,3.32c1.36,1.28,1.92,1.83,3.13,3.67,2.65,4.02,6.87,15.35,6.87,15.35l25.31,64.52c.33.83-.29,1.73-1.18,1.73l-94.38-.03c-.89,0-1.51-.9-1.18-1.73l25.3-64.49Z"/>
+    </g>
+
+  </svg>
+</div>
+
+<script>
+let running = false;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const q = s => [...document.querySelectorAll(s)];
+
+/* ── easing functions ─────────────────────────────────────────────────── */
+function easeInOut(t) {
+  // smooth S-curve, no abrupt changes
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+/* ── fade helper ──────────────────────────────────────────────────────── */
+function fadeTo(els, targetOp, dur, stagger = 0) {
+  els.forEach((el, i) => setTimeout(() => {
+    el.style.transition = `opacity ${dur}ms cubic-bezier(0.4,0,0.6,1)`;
+    el.style.opacity = targetOp;
+  }, i * stagger));
+}
+
+/* ── reset ────────────────────────────────────────────────────────────── */
+function resetAll() {
+  q('.gl,.gd').forEach(el => {
+    el.style.transition = 'none'; el.style.opacity = '0';
+  });
+  // reset all cross lines including those inside groups
+  q('#ch line').forEach(el => {
+    el.style.transition = 'none'; el.style.opacity = '0';
+  });
+  q('.gc').forEach(el => {
+    el.style.transition = 'none';
+    el.style.strokeDasharray = '';
+    el.style.strokeDashoffset = '';
+    el.style.opacity = '0';
+  });
+  q('.lp').forEach(el => {
+    el.style.transition = 'none';
+    el.style.strokeDasharray = '';
+    el.style.strokeDashoffset = '';
+    el.style.opacity = '0';
+    el.classList.remove('filled');
+  });
+  q('.dot').forEach(el => {
+    el.style.transition = 'none';
+    el.style.opacity = '0';
+    el.setAttribute('r', '3');
+  });
+}
+
+/* ── circle draw via CSS transition ──────────────────────────────────── */
+function animCircle(el, delay) {
+  const r    = parseFloat(el.getAttribute('r'));
+  const circ = 2 * Math.PI * r;
+  const dur  = 600 + r * 18;
+  setTimeout(() => {
+    el.style.strokeDasharray  = circ;
+    el.style.strokeDashoffset = circ;
+    el.style.opacity = '0.35';
+    void el.getBoundingClientRect();
+    el.style.transition = `stroke-dashoffset ${dur}ms cubic-bezier(0.4,0,0.6,1)`;
+    el.style.strokeDashoffset = '0';
+  }, delay);
+}
+
+/* ── dot pulse — crosshair fades out, dot appears in its place ────────── */
+function pulseDot(id, delay) {
+  const letter = id.replace('dot-', '');
+  setTimeout(() => {
+    // fade out the crosshair
+    const cross = document.getElementById('cross-' + letter);
+    if (cross) {
+      cross.querySelectorAll('line').forEach(l => {
+        l.style.transition = 'opacity 0.3s ease';
+        l.style.opacity = '0';
+      });
+    }
+    // show dot
+    const dot = document.getElementById(id);
+    if (!dot) return;
+    dot.style.transition = 'opacity 0.2s ease';
+    dot.style.opacity = '1';
+    dot.setAttribute('r', '4');
+    setTimeout(() => {
+      dot.style.transition = 'opacity 0.5s ease';
+      dot.style.opacity = '0.5';
+      dot.setAttribute('r', '3');
+    }, 300);
+  }, delay);
+}
+
+/*
+  ── drawPath via requestAnimationFrame ────────────────────────────────
+  Draws the path in both directions simultaneously from startFrac.
+  Uses rAF with manual interpolation — zero CSS transitions on the path,
+  so there are NO cuts, NO re-triggers, NO flicker.
+
+  The stroke trick:
+    dasharray  = [fwd, gap, bwd, gap2]  — two independent segments
+    We grow fwd (forward from startFrac) and bwd (backward from startFrac)
+    each frame using dashoffset manipulation.
+
+  Simpler equivalent used here:
+    Two separate <path> clones drawn simultaneously:
+      clone1: draws from startFrac → end
+      clone2: draws from startFrac → 0  (reversed path)
+
+  Actually simplest reliable approach:
+    Use a single rAF loop that sets dasharray/dashoffset each frame
+    to show exactly [0..t_bwd] + [startFrac..startFrac+t_fwd] of the path.
+    SVG dasharray supports multiple values for this.
+*/
+function drawPath(el, startFrac, totalDur, delay) {
+  setTimeout(() => {
+    let len;
+    try { len = el.getTotalLength(); } catch(e) { len = 1500; }
+
+    const s = startFrac * len; // start offset in px
+
+    el.style.opacity = '1';
+    el.style.strokeDasharray  = '0 ' + len;
+    el.style.strokeDashoffset = '0';
+
+    let startTime = null;
+    let rafId;
+
+    function frame(ts) {
+      if (!startTime) startTime = ts;
+      const elapsed = ts - startTime;
+      const t = Math.min(elapsed / totalDur, 1);
+      const prog = easeInOut(t); // 0..1
+
+      // forward segment: startFrac → end, grows by prog*(1-startFrac)*len
+      const fwd = prog * (len - s);
+      // backward segment: startFrac → 0, grows by prog*startFrac*len
+      const bwd = prog * s;
+
+      /*
+        dasharray layout on the path (starting from position 0):
+          [bwd]  visible  (0 → bwd)
+          [s-bwd] gap     (bwd → s)
+          [fwd]  visible  (s → s+fwd)
+          [rest]  gap     (s+fwd → end)
+        dashoffset = 0
+      */
+      const gap1 = s - bwd;
+      const gap2 = len - s - fwd;
+
+      el.style.strokeDasharray  =
+        `${bwd} ${gap1 < 0 ? 0 : gap1} ${fwd} ${gap2 < 0 ? 0 : gap2}`;
+      el.style.strokeDashoffset = '0';
+
+      if (t < 1) {
+        rafId = requestAnimationFrame(frame);
+      } else {
+        // fully drawn — clean up
+        el.style.strokeDasharray  = '';
+        el.style.strokeDashoffset = '';
+      }
+    }
+
+    rafId = requestAnimationFrame(frame);
+  }, delay);
+}
+
+/* ── main sequence ────────────────────────────────────────────────────── */
+async function startAnimation() {
+  if (running) return;
+  running = true;
+  resetAll();
+  await wait(400);
+
+  // Horizontal grid — staggered fade
+  fadeTo(q('#hl line'), '0.38', 600, 55);
+  await wait(800);
+
+  // Vertical grid
+  fadeTo(q('#vl line'), '0.38', 600, 35);
+  await wait(850);
+
+  // Crosshairs — fade in all cross lines
+  fadeTo(q('#ch line'), '0.85', 300, 50);
+  await wait(500);
+
+  // Construction circles
+  const circles = q('#cc circle');
+  circles.forEach((el, i) => animCircle(el, i * 80));
+  await wait(circles.length * 80 + 500);
+
+  // ── Letters — rAF-driven, no cuts, faster ──
+  const letters = [
+    { ids: ['e3', 'e1', 'e2'], dot: 'dot-e', dur: 1000, gap: 120 },
+    { ids: ['n1'],              dot: 'dot-n', dur: 1200, gap: 0   },
+    { ids: ['i1'],              dot: 'dot-i', dur:  500, gap: 0   },
+    { ids: ['g1'],              dot: 'dot-g', dur: 1200, gap: 0   },
+    { ids: ['m1'],              dot: 'dot-m', dur: 1300, gap: 0   },
+    { ids: ['a1'],              dot: 'dot-a', dur: 1300, gap: 0   },
+  ];
+
+  let cursor = 0;
+  for (const letter of letters) {
+    pulseDot(letter.dot, cursor);
+    cursor += 180;
+
+    letter.ids.forEach((id, pi) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const sf = parseFloat(el.dataset.start || '0');
+      drawPath(el, sf, letter.dur, cursor + pi * letter.gap);
+    });
+
+    cursor += letter.dur + 180;
+  }
+
+  await wait(cursor + 300);
+
+  // Brief pause — logo visible as outline with grid still showing
+  await wait(400);
+
+  // Swap outline → fill AND simultaneously fade out grid/circles/crosshairs/dots
+  q('.lp').forEach(el => el.classList.add('filled'));
+  fadeTo([...q('#hl line'), ...q('#vl line'), ...q('#ch line')], '0', 800);
+  fadeTo(q('#cc circle'), '0', 800);
+  fadeTo(q('.dot'), '0', 400);
+
+  // Hold filled logo for 4s
+  await wait(4000);
+
+  // Slow fade-out of everything before loop restarts
+  fadeTo(q('.lp'), '0', 1200);
+  await wait(1300);
+
+  running = false;
+  startAnimation();
+  startAnimation();
+}
+
+window.addEventListener('load', () => setTimeout(startAnimation, 600));
+</script>
+</body>
+</html>
